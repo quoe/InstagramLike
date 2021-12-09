@@ -72,15 +72,15 @@
 <pre class="sikuli-code">
 <span class="kw">import</span> random
 Settings.MoveMouseDelay = <span class="dig">0.01</span>
-iter = <span class="dig">2</span>
+iter = <span class="dig">200</span>
 count = random.randrange(iter, iter * <span class="dig">2</span>)
 i = <span class="dig">1</span>
 <span class="kw">while</span> i &lt;= count:
     <span class="kw">try</span>:
-        <span class="kw">if</span> exists(Pattern(<img src="1609497574296.png" />).similar(<span class="dig">0.95</span>)):
-            <span class="skw">click</span>(Pattern(<img src="1609497574296.png" />).similar(<span class="dig">0.95</span>))
-            <span class="kw">if</span> exists(Pattern(<img src="1634675207891.png" />).similar(<span class="dig">0.95</span>)):
-                hover(Pattern(<img src="1634675207891.png" />).similar(<span class="dig">0.95</span>).targetOffset(-<span class="dig">50</span>,<span class="dig">0</span>)) <span class="cmt">#Чтобы не всплывали окна по ссылке профиля</span>
+        <span class="kw">if</span> exists(Pattern(<img src="OO.png" />).similar(<span class="dig">0.80</span>).targetOffset(-<span class="dig">19</span>,-<span class="dig">1</span>)):
+            <span class="skw">click</span>(Pattern(<img src="OO.png" />).similar(<span class="dig">0.80</span>).targetOffset(-<span class="dig">19</span>,-<span class="dig">1</span>))
+            <span class="kw">if</span> exists(Pattern(<img src="1639060530200.png" />).similar(<span class="dig">0.80</span>)):
+                hover(Pattern(<img src="1639060530200.png" />).similar(<span class="dig">0.80</span>).targetOffset(-<span class="dig">69</span>,<span class="dig">0</span>)) <span class="cmt">#Чтобы не всплывали окна по ссылке профиля</span>
         <span class="skw">type</span>(Key.PAGE_DOWN)
     <span class="kw">except</span>:
         <span class="skw">type</span>(Key.PAGE_DOWN)
