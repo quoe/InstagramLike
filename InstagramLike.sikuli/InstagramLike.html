@@ -70,15 +70,118 @@
 <h2>InstagramLike.sikuli\InstagramLike.sikuli</h2> <a href="InstagramLike.sikuli\InstagramLike.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
+<span class="kw">from</span> datetime <span class="kw">import</span> datetime
 <span class="kw">import</span> random
 Settings.MoveMouseDelay = <span class="dig">0.01</span>
+LogFilePath = <span class="str">"E:\\"</span>
+LogFileName = <span class="str">"Sikuli_InstaBot_Log_"</span> + datetime.strftime(datetime.now(), <span class="str">"%Y.%m.%d %H_%M_%S"</span>) + <span class="str">".txt"</span>
+log = file(LogFilePath + LogFileName, <span class="str">"w"</span>)
+base_x = -<span class="dig">19</span>
+base_y = -<span class="dig">1</span>
+max_dx = <span class="dig">4</span>
+max_dy = <span class="dig">5</span>
 iter = <span class="dig">200</span>
+
+<span class="kw">def</span> randomClick(image, max_dx, max_dy):
+    dx = random.randrange(-max_dx, max_dx)
+    dy = random.randrange(-max_dy, max_dy)
+    baseOffset_x = base_x
+    baseOffset_y = base_y
+    <span class="skw">click</span>(image.targetOffset(baseOffset_x + dx, baseOffset_y + dy))
+
+<span class="kw">def</span> latinizator(letter):
+    legend = {
+    <span class="cmt">#' ':'_',</span>
+    <span class="cmt">#',':'',</span>
+    <span class="str">'а'</span>:<span class="str">'a'</span>,
+    <span class="str">'б'</span>:<span class="str">'b'</span>,
+    <span class="str">'в'</span>:<span class="str">'v'</span>,
+    <span class="str">'г'</span>:<span class="str">'g'</span>,
+    <span class="str">'д'</span>:<span class="str">'d'</span>,
+    <span class="str">'е'</span>:<span class="str">'e'</span>,
+    <span class="str">'ё'</span>:<span class="str">'yo'</span>,
+    <span class="str">'ж'</span>:<span class="str">'zh'</span>,
+    <span class="str">'з'</span>:<span class="str">'z'</span>,
+    <span class="str">'и'</span>:<span class="str">'i'</span>,
+    <span class="str">'й'</span>:<span class="str">'y'</span>,
+    <span class="str">'к'</span>:<span class="str">'k'</span>,
+    <span class="str">'л'</span>:<span class="str">'l'</span>,
+    <span class="str">'м'</span>:<span class="str">'m'</span>,
+    <span class="str">'н'</span>:<span class="str">'n'</span>,
+    <span class="str">'о'</span>:<span class="str">'o'</span>,
+    <span class="str">'п'</span>:<span class="str">'p'</span>,
+    <span class="str">'р'</span>:<span class="str">'r'</span>,
+    <span class="str">'с'</span>:<span class="str">'s'</span>,
+    <span class="str">'т'</span>:<span class="str">'t'</span>,
+    <span class="str">'у'</span>:<span class="str">'u'</span>,
+    <span class="str">'ф'</span>:<span class="str">'f'</span>,
+    <span class="str">'х'</span>:<span class="str">'h'</span>,
+    <span class="str">'ц'</span>:<span class="str">'c'</span>,
+    <span class="str">'ч'</span>:<span class="str">'ch'</span>,
+    <span class="str">'ш'</span>:<span class="str">'sh'</span>,
+    <span class="str">'щ'</span>:<span class="str">'shch'</span>,
+    <span class="str">'ъ'</span>:<span class="str">'y'</span>,
+    <span class="str">'ы'</span>:<span class="str">'y'</span>,
+    <span class="str">'ь'</span>:<span class="str">"'"</span>,
+    <span class="str">'э'</span>:<span class="str">'e'</span>,
+    <span class="str">'ю'</span>:<span class="str">'yu'</span>,
+    <span class="str">'я'</span>:<span class="str">'ya'</span>,
+
+    <span class="str">'А'</span>:<span class="str">'A'</span>,
+    <span class="str">'Б'</span>:<span class="str">'B'</span>,
+    <span class="str">'В'</span>:<span class="str">'V'</span>,
+    <span class="str">'Г'</span>:<span class="str">'G'</span>,
+    <span class="str">'Д'</span>:<span class="str">'D'</span>,
+    <span class="str">'Е'</span>:<span class="str">'E'</span>,
+    <span class="str">'Ё'</span>:<span class="str">'Yo'</span>,
+    <span class="str">'Ж'</span>:<span class="str">'Zh'</span>,
+    <span class="str">'З'</span>:<span class="str">'Z'</span>,
+    <span class="str">'И'</span>:<span class="str">'I'</span>,
+    <span class="str">'Й'</span>:<span class="str">'Y'</span>,
+    <span class="str">'К'</span>:<span class="str">'K'</span>,
+    <span class="str">'Л'</span>:<span class="str">'L'</span>,
+    <span class="str">'М'</span>:<span class="str">'M'</span>,
+    <span class="str">'Н'</span>:<span class="str">'N'</span>,
+    <span class="str">'О'</span>:<span class="str">'O'</span>,
+    <span class="str">'П'</span>:<span class="str">'P'</span>,
+    <span class="str">'Р'</span>:<span class="str">'R'</span>,
+    <span class="str">'С'</span>:<span class="str">'S'</span>,
+    <span class="str">'Т'</span>:<span class="str">'T'</span>,
+    <span class="str">'У'</span>:<span class="str">'U'</span>,
+    <span class="str">'Ф'</span>:<span class="str">'F'</span>,
+    <span class="str">'Х'</span>:<span class="str">'H'</span>,
+    <span class="str">'Ц'</span>:<span class="str">'Ts'</span>,
+    <span class="str">'Ч'</span>:<span class="str">'Ch'</span>,
+    <span class="str">'Ш'</span>:<span class="str">'Sh'</span>,
+    <span class="str">'Щ'</span>:<span class="str">'Shch'</span>,
+    <span class="str">'Ъ'</span>:<span class="str">'Y'</span>,
+    <span class="str">'Ы'</span>:<span class="str">'Y'</span>,
+    <span class="str">'Ь'</span>:<span class="str">"'"</span>,
+    <span class="str">'Э'</span>:<span class="str">'E'</span>,
+    <span class="str">'Ю'</span>:<span class="str">'Yu'</span>,
+    <span class="str">'Я'</span>:<span class="str">'Ya'</span>,
+    }
+    <span class="kw">for</span> i, j <span class="kw">in</span> legend.items():
+        letter = letter.replace(i, j)
+    <span class="kw">return</span> letter
+
+<span class="kw">def</span> WriteLog(t):
+    nl = <span class="str">"\n"</span> <span class="cmt"># new line character</span>
+    log = open(LogFilePath + LogFileName, <span class="str">"a"</span>)
+    TD = datetime.strftime(datetime.now(), <span class="str">"%Y.%m.%d %H:%M:%S"</span>) + <span class="str">"\t"</span>
+    log.write(TD + t + nl)
+    log.close()
+    <span class="kw">print</span>(TD + latinizator(t))
+
 count = random.randrange(iter, iter * <span class="dig">2</span>)
+clickCount = <span class="dig">0</span>;
 i = <span class="dig">1</span>
 <span class="kw">while</span> i &lt;= count:
     <span class="kw">try</span>:
         <span class="kw">if</span> exists(Pattern(<img src="OO.png" />).similar(<span class="dig">0.80</span>).targetOffset(-<span class="dig">19</span>,-<span class="dig">1</span>)):
-            <span class="skw">click</span>(Pattern(<img src="OO.png" />).similar(<span class="dig">0.80</span>).targetOffset(-<span class="dig">19</span>,-<span class="dig">1</span>))
+            randomClick(Pattern(<img src="OO.png" />).similar(<span class="dig">0.80</span>).targetOffset(-<span class="dig">19</span>,-<span class="dig">1</span>), max_dx, max_dy)
+            clickCount += <span class="dig">1</span>
+            WriteLog(<span class="str">"\tЦикл\t"</span> + str(i) + <span class="str">"\tКлик\t"</span> + str(clickCount))
             <span class="kw">if</span> exists(Pattern(<img src="1639060530200.png" />).similar(<span class="dig">0.80</span>)):
                 hover(Pattern(<img src="1639060530200.png" />).similar(<span class="dig">0.80</span>).targetOffset(-<span class="dig">69</span>,<span class="dig">0</span>)) <span class="cmt">#Чтобы не всплывали окна по ссылке профиля</span>
         <span class="skw">type</span>(Key.PAGE_DOWN)
